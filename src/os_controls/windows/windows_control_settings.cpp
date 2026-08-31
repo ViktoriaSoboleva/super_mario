@@ -5,6 +5,7 @@
 using biv::WindowsControlSettings;
 
 void WindowsControlSettings::init() {
+	
 	void* handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO structCursorInfo;
 	GetConsoleCursorInfo(handle, &structCursorInfo);
