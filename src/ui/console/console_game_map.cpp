@@ -1,3 +1,7 @@
+#ifdef WINDOWS_CONSOLE
+#include <windows.h>
+#endif
+
 #include "console_game_map.hpp"
 
 #include <algorithm>
@@ -84,16 +88,29 @@ void ConsoleGameMap::remove_objs() {
 }
 
 void ConsoleGameMap::show() const noexcept {
-	#ifdef WINDOWS_CONSOLE
-		for (int i = 0; i < height; i++) {
-			std::cout << map[i];
-		}
-	#elif defined(LINUX_CONSOLE)
-		for (int i = 0; i < height; i++) {
-			//printw("%s", map[i]);
-			move(i, 0); 
-			addstr(map[i]);
-		}
-		::refresh();
-	#endif
+#ifdef WINDOWS_CONSOLE
+
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    for (int i = 0; i < height; i++) {
+        COORD pos;
+        pos.X = 0;
+        pos.Y = static_cast<SHORT>(i);
+
+        SetConsoleCursorPosition(handle, pos);
+        std::cout << map[i];
+    }
+
+    std::cout.flush();
+
+#elif defined(LINUX_CONSOLE)
+
+    for (int i = 0; i < height; i++) {
+        move(i, 0);
+        addstr(map[i]);
+    }
+
+    ::refresh();
+
+#endif
 }
