@@ -15,6 +15,7 @@ void ConsoleUIFactory::clear_data() {
 	enemies.clear();
 	flying_enemies.clear();
 	jumping_enemies.clear();
+	moving_platforms.clear();
 	moneys.clear();
 }
 
@@ -69,6 +70,28 @@ void ConsoleUIFactory::create_jumping_enemy(
     game->add_movable(enemy);
     game->add_collisionable(enemy);
     game_map->add_obj(enemy);
+}
+
+void ConsoleUIFactory::create_moving_platform(
+    const Coord& top_left,
+    const int width,
+    const int height
+) {
+    ConsoleMovingPlatform* platform =
+        new ConsoleMovingPlatform(
+            top_left,
+            width,
+            height,
+            mario
+        );
+
+    moving_platforms.push_back(platform);
+
+    game->add_map_movable(platform);
+    game->add_movable(platform);
+    game->add_static_obj(platform);
+
+    game_map->add_obj(platform);
 }
 
 void ConsoleUIFactory::create_full_box(

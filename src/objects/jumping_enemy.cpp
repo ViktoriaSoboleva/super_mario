@@ -12,9 +12,9 @@ JumpingEnemy::JumpingEnemy(
 }
 
 void JumpingEnemy::process_vertical_static_collision(Rect* obj) noexcept {
-    Enemy::process_vertical_static_collision(obj);
-
-    if (vspeed == 0) {
+    if (vspeed > 0) {
+        top_left.y -= vspeed;
+        vspeed = 0;
         jump();
     }
 }
