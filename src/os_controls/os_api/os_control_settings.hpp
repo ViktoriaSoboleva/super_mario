@@ -1,6 +1,6 @@
 #pragma once
 
-namespace biv {
+namespace svr {
 	class OSControlSettings {
 		public:
 			virtual void init() = 0;

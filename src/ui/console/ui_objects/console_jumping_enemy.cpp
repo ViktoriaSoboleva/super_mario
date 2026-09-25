@@ -1,6 +1,6 @@
 #include "console_jumping_enemy.hpp"
 
-using biv::ConsoleJumpingEnemy;
+using svr::ConsoleJumpingEnemy;
 
 ConsoleJumpingEnemy::ConsoleJumpingEnemy(
     const Coord& top_left,

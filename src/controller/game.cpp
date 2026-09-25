@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-using biv::Game;
+using svr::Game;
 
 Game::Game() {}
 

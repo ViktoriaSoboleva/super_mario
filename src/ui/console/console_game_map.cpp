@@ -12,7 +12,7 @@
 	#include <ncurses.h>
 #endif
 
-using biv::ConsoleGameMap;
+using svr::ConsoleGameMap;
 
 ConsoleGameMap::ConsoleGameMap(const int height, const int width) 
 	: GameMap(height, width) {

@@ -1,6 +1,6 @@
 #include "moving_platform.hpp"
 
-using biv::MovingPlatform;
+using svr::MovingPlatform;
 
 MovingPlatform::MovingPlatform(
     const Coord& top_left,

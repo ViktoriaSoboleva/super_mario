@@ -12,7 +12,7 @@
 #include "console_moving_platform.hpp"
 #include "ui_factory.hpp"
 
-namespace biv {
+namespace svr {
 	class ConsoleUIFactory : public UIFactory {
 		private:
 			ConsoleGameMap* game_map = nullptr;

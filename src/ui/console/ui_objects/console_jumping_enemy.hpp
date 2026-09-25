@@ -3,7 +3,7 @@
 #include "console_ui_obj_rect_adapter.hpp"
 #include "jumping_enemy.hpp"
 
-namespace biv {
+namespace svr {
 
 class ConsoleJumpingEnemy :
     public JumpingEnemy,

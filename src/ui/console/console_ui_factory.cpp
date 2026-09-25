@@ -1,6 +1,6 @@
 #include "console_ui_factory.hpp"
 
-using biv::ConsoleUIFactory;
+using svr::ConsoleUIFactory;
 
 ConsoleUIFactory::ConsoleUIFactory(Game* game) : UIFactory(game) {}
 
@@ -143,13 +143,13 @@ void ConsoleUIFactory::create_ship(
 	game_map->add_obj(ship);
 }
 
-biv::GameMap* ConsoleUIFactory::get_game_map(const int height, const int width) {
+svr::GameMap* ConsoleUIFactory::get_game_map(const int height, const int width) {
 	if (game_map == nullptr) {
 		game_map = new ConsoleGameMap(height, width);
 	}
 	return game_map;
 }
 
-biv::Mario* ConsoleUIFactory::get_mario() {
+svr::Mario* ConsoleUIFactory::get_mario() {
 	return mario;
 }

@@ -3,7 +3,7 @@
 #include "console_ui_obj_rect_adapter.hpp"
 #include "moving_platform.hpp"
 
-namespace biv {
+namespace svr {
 
 class ConsoleMovingPlatform :
     public MovingPlatform,

@@ -1,8 +1,8 @@
 #include "third_level.hpp"
-using biv::ThirdLevel;
+using svr::ThirdLevel;
 ThirdLevel::ThirdLevel(UIFactory* ui_factory) : GameLevel(ui_factory) { init_data(); }
 bool ThirdLevel::is_final() const noexcept { return true; }
-biv::GameLevel* ThirdLevel::get_next() { return next; }
+svr::GameLevel* ThirdLevel::get_next() { return next; }
 void ThirdLevel::init_data() 
 { 
     ui_factory->create_mario({39, 10}, 3, 3);

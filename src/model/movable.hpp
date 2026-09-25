@@ -2,7 +2,7 @@
 
 #include "rect.hpp"
 
-namespace biv {
+namespace svr {
 	class Movable : virtual public Rect {
 		protected:
 			static constexpr float JUMP_SPEED = -1.0f;

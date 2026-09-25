@@ -2,7 +2,7 @@
 
 #include "game_level.hpp"
 
-namespace biv {
+namespace svr {
 	class FirstLevel : public GameLevel {
 		public:
 			FirstLevel(UIFactory* ui_factory);

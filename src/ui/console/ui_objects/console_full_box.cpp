@@ -1,6 +1,6 @@
 #include "console_full_box.hpp"
 
-using biv::ConsoleFullBox;
+using svr::ConsoleFullBox;
 
 ConsoleFullBox::ConsoleFullBox(
 	const Coord& top_left, 

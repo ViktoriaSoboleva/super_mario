@@ -1,6 +1,6 @@
 #include "console_flying_enemy.hpp"
 
-using biv::ConsoleFlyingEnemy;
+using svr::ConsoleFlyingEnemy;
 
 ConsoleFlyingEnemy::ConsoleFlyingEnemy(
     const Coord& top_left,

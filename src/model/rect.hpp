@@ -2,7 +2,7 @@
 
 #include "coord.hpp"
 
-namespace biv {
+namespace svr {
 	class Rect {
 		protected:
 			Coord top_left;

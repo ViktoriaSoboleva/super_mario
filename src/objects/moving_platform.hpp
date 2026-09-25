@@ -4,7 +4,7 @@
 #include "movable.hpp"
 #include "mario.hpp"
 
-namespace biv {
+namespace svr {
 
 class MovingPlatform :
     public Ship,

@@ -47,50 +47,50 @@ int main() {
 	const int map_weight = 200;
 	auto frame_delay = std::chrono::milliseconds(0);
 	
-	biv::OSControlSettings* control_settings = nullptr;
-	biv::KeyBoard* keyboard = nullptr;
+	svr::OSControlSettings* control_settings = nullptr;
+	svr::KeyBoard* keyboard = nullptr;
 	#ifdef WINDOWS_CONSOLE
-		control_settings = new biv::WindowsControlSettings();
-		keyboard = new biv::WindowsKeyBoard();
+		control_settings = new svr::WindowsControlSettings();
+		keyboard = new svr::WindowsKeyBoard();
 		frame_delay = std::chrono::milliseconds(10);
 	#elif defined(LINUX_CONSOLE)
-		control_settings = new biv::LinuxControlSettings(map_height, map_weight);
-		keyboard = new biv::LinuxKeyboard();
+		control_settings = new svr::LinuxControlSettings(map_height, map_weight);
+		keyboard = new svr::LinuxKeyboard();
 		frame_delay = std::chrono::milliseconds(50);
 	#endif
 	
 	control_settings->init();
 	keyboard->on();
 	
-	biv::Game game;
-	biv::UIFactory* ui_factory = new biv::ConsoleUIFactory(&game);
-	biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
-	biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
-	biv::Mario* mario = ui_factory->get_mario();
+	svr::Game game;
+	svr::UIFactory* ui_factory = new svr::ConsoleUIFactory(&game);
+	svr::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
+	svr::GameLevel* game_level = new svr::FirstLevel(ui_factory);
+	svr::Mario* mario = ui_factory->get_mario();
 	
-	biv::UserInput user_input;
+	svr::UserInput user_input;
 	do {
 		// 2. Получение пользовательского ввода	
 		user_input = keyboard->get_user_input();
 		switch (user_input) {
-			case biv::UserInput::MAP_LEFT:
+			case svr::UserInput::MAP_LEFT:
 				mario->move_map_left();
 				if (!game.check_static_collisions(mario)) {
 					game.move_map_left();
 				}
 				mario->move_map_right();
 				break;
-			case biv::UserInput::MAP_RIGHT:
+			case svr::UserInput::MAP_RIGHT:
 				mario->move_map_right();
 				if (!game.check_static_collisions(mario)) {
 					game.move_map_right();
 				}
 				mario->move_map_left();
 				break;
-			case biv::UserInput::MARIO_JUMP:
+			case svr::UserInput::MARIO_JUMP:
 				mario->jump();
 				break;
-			case biv::UserInput::EXIT:
+			case svr::UserInput::EXIT:
 				game.finish();
 				break;
 		}

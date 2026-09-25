@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-using biv::WindowsControlSettings;
+using svr::WindowsControlSettings;
 
 void WindowsControlSettings::init() {
 	

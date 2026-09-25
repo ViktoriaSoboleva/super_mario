@@ -1,6 +1,6 @@
 #include "jumping_enemy.hpp"
 
-using biv::JumpingEnemy;
+using svr::JumpingEnemy;
 
 JumpingEnemy::JumpingEnemy(
     const Coord& top_left,

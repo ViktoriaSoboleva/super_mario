@@ -1,6 +1,6 @@
 #include "console_moving_platform.hpp"
 
-using biv::ConsoleMovingPlatform;
+using svr::ConsoleMovingPlatform;
 
 ConsoleMovingPlatform::ConsoleMovingPlatform(
     const Coord& top_left,

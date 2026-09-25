@@ -2,7 +2,7 @@
 
 #include "enemy.hpp"
 
-namespace biv {
+namespace svr {
 
 class JumpingEnemy : public Enemy {
 public:

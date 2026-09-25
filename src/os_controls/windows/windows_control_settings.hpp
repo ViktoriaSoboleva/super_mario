@@ -2,7 +2,7 @@
 
 #include "os_control_settings.hpp"
 
-namespace biv {
+namespace svr {
 	class WindowsControlSettings : public OSControlSettings {
 		public:
 			void init() override;

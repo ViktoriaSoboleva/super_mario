@@ -1,6 +1,6 @@
 #include "flying_enemy.hpp"
 
-using biv::FlyingEnemy;
+using svr::FlyingEnemy;
 
 FlyingEnemy::FlyingEnemy(
     const Coord& top_left,
