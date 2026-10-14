@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "moving_platform.hpp"
 
 #include <algorithm>
 
@@ -16,6 +17,11 @@ void Game::add_map_movable(MapMovable* obj) {
 
 void Game::add_mario(Mario* obj) {
 	mario = obj;
+}
+
+void Game::add_moving_platform(MovingPlatform* obj) {
+    moving_platform = obj;
+    movable_objs.push_back(obj);
 }
 
 void Game::add_movable(Movable* obj) {
@@ -102,9 +108,20 @@ void Game::move_map_right() noexcept {
 	}
 }
 
-void Game::move_objs_horizontally() noexcept {
-	for (Movable* obj: movable_objs) {
-		obj->move_horizontally();
+void Game::move_objs_horizontally() noexcept { 
+	for (Movable* obj : movable_objs) { obj->move_horizontally(); }
+	if (mario != nullptr && moving_platform != nullptr) {
+    	const bool mario_on_platform =
+        	mario->get_bottom() >= moving_platform->get_top() - 1.0f &&
+        	mario->get_bottom() <= moving_platform->get_top() + 1.0f &&
+        	mario->get_right() > moving_platform->get_left() &&
+        	mario->get_left() < moving_platform->get_right();
+
+    	if (mario_on_platform) {
+        	mario->move_horizontal_offset(
+            	moving_platform->get_hspeed()
+        	);
+    	}
 	}
 }
 
@@ -145,6 +162,7 @@ void Game::remove_static_obj(Rect* obj) {
 void Game::start_level() noexcept {
 	is_level_end_ = false;
 }
+
 
 // ----------------------------------------------------------------------------
 // 									PRIVATE

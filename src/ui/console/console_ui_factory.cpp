@@ -81,14 +81,13 @@ void ConsoleUIFactory::create_moving_platform(
         new ConsoleMovingPlatform(
             top_left,
             width,
-            height,
-            mario
+            height
         );
 
     moving_platforms.push_back(platform);
 
     game->add_map_movable(platform);
-    game->add_movable(platform);
+    game->add_moving_platform(platform);
     game->add_static_obj(platform);
 
     game_map->add_obj(platform);

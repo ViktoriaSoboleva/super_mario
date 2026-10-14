@@ -2,7 +2,6 @@
 
 #include "ship.hpp"
 #include "movable.hpp"
-#include "mario.hpp"
 
 namespace svr {
 
@@ -13,14 +12,12 @@ class MovingPlatform :
 private:
     float start_x;
     float end_x;
-    Mario* mario;
 
 public:
     MovingPlatform(
         const Coord& top_left,
         const int width,
-        const int height,
-        Mario* mario
+        const int height
     );
 
     void move_horizontally() noexcept override;

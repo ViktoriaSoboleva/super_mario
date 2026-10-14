@@ -13,6 +13,7 @@
 #include "rect.hpp"
 
 namespace svr {
+	class MovingPlatform;
 	class Game {
 		private:
 			std::vector<MapMovable*> map_movable_objs;
@@ -21,6 +22,7 @@ namespace svr {
 			std::vector<Movable*> movable_objs;
 			
 			Mario* mario = nullptr;
+			MovingPlatform* moving_platform = nullptr;
 			
 			bool is_finished_ = false;
 			bool is_level_end_ = false;
@@ -57,6 +59,8 @@ namespace svr {
 			void remove_static_obj(Rect*);
 			
 			void start_level() noexcept;
+
+			void add_moving_platform(MovingPlatform*);
 
 		private:
 			template<class T>

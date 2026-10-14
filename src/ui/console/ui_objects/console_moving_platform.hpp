@@ -13,8 +13,7 @@ public:
     ConsoleMovingPlatform(
         const Coord& top_left,
         const int width,
-        const int height,
-        Mario* mario
+        const int height
     );
 
     char get_brush() const noexcept override;

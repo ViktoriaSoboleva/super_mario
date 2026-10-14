@@ -5,10 +5,9 @@ using svr::ConsoleMovingPlatform;
 ConsoleMovingPlatform::ConsoleMovingPlatform(
     const Coord& top_left,
     const int width,
-    const int height,
-    Mario* mario
+    const int height
 ) :
-    MovingPlatform(top_left, width, height, mario),
+    MovingPlatform(top_left, width, height),
     ConsoleUIObjectRectAdapter(top_left, width, height)
 {}
 
