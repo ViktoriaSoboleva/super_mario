@@ -41,7 +41,7 @@
 
 int main() {
 	// 1. Установка параметров игры
-	using namespace std::chrono_literals;
+	
 	
 	const int map_height = 30;
 	const int map_weight = 200;
@@ -111,14 +111,14 @@ int main() {
 			keyboard->on();
 			game_level->restart();
 			mario = ui_factory->get_mario();
-			std::this_thread::sleep_for(1000ms);
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 		
 		if (game.is_level_end()) {
 			if (!game_level->is_final()) {
 				game_level = game_level->get_next();
 				mario = ui_factory->get_mario();
-				std::this_thread::sleep_for(1000ms);
+				std::this_thread::sleep_for(std::chrono::milliseconds(100));
 				keyboard->off();
 				keyboard->on();
 				game.start_level();

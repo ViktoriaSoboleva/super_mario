@@ -35,8 +35,10 @@ void JumpingEnemy::process_mario_collision(Collisionable* mario) noexcept {
 }
 void JumpingEnemy::process_vertical_static_collision(Rect* obj) noexcept {
     if (vspeed > 0) {
-        top_left.y -= vspeed;
+        top_left.y = obj->get_top() - height;
+        vspeed = JUMP_SPEED;
+    } else if (vspeed < 0) {
+        top_left.y = obj->get_bottom();
         vspeed = 0;
-        jump();
     }
 }

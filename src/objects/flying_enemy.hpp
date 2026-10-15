@@ -3,11 +3,13 @@
 #include "movable.hpp"
 
 #include "rect_map_movable_adapter.hpp"
-#include "enemy.hpp"
 
 namespace svr {
 
 class FlyingEnemy : public RectMapMovableAdapter, public Movable, public Collisionable {
+private:
+	float min_x;
+	float max_x;
 
 public:
     FlyingEnemy(const Coord& top_left, const int width, const int height);
@@ -19,6 +21,13 @@ public:
 	void process_mario_collision(Collisionable* mario) noexcept override;
 		
     void process_vertical_static_collision(Rect* obj) noexcept override;
+	void move_vertically() noexcept override;
+	void move_horizontally() noexcept override;
+
+	void move_map_left() noexcept override;
+	void move_map_right() noexcept override;
+	
+	
 };
 
 }

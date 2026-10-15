@@ -10,6 +10,8 @@ FlyingEnemy::FlyingEnemy(
     Movable(top_left, width, height,0,0){
         vspeed = 0;
 	    hspeed = 0.2;
+		min_x = top_left.x;
+		max_x = top_left.x + 13;
 
 }
 
@@ -22,8 +24,14 @@ svr::Speed FlyingEnemy::get_speed() const noexcept {
 }
 
 void FlyingEnemy::process_horizontal_static_collision(Rect* obj) noexcept {
-	hspeed = -hspeed;
-	move_horizontally();
+	
+}
+
+void FlyingEnemy::move_horizontally() noexcept { 
+	top_left.x += hspeed;
+	if (top_left.x <= min_x || top_left.x + width >= max_x) {
+    	hspeed = -hspeed;
+	}
 }
 
 void FlyingEnemy::process_mario_collision(Collisionable* mario) noexcept {
@@ -38,4 +46,18 @@ void FlyingEnemy::process_vertical_static_collision(Rect* obj) noexcept {
         
         vspeed = -vspeed;
     
+}
+
+void FlyingEnemy::move_vertically() noexcept {}
+
+void FlyingEnemy::move_map_left() noexcept {
+    top_left.x -= MapMovable::MAP_STEP;
+    min_x -= MapMovable::MAP_STEP;
+    max_x -= MapMovable::MAP_STEP;
+}
+
+void FlyingEnemy::move_map_right() noexcept {
+    top_left.x += MapMovable::MAP_STEP;
+    min_x += MapMovable::MAP_STEP;
+    max_x += MapMovable::MAP_STEP;
 }
