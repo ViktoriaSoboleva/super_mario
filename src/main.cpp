@@ -1,23 +1,3 @@
-/**
-	Игровой цикл - это обощённое представление потока событий, происходящих в игре.
-
-	Игровой цикл:
-		1. Установка параметров игры
-		2. Получение пользовательского ввода
-		3. Обновление внутреннего состояния игры
-		4. Обновление изображения на экране
-		5. Проверка того, не окончена ли игра
-
-		*** Если игра не окончена, то возвращаемся в пункт № 2.
-
-		6. Завершение
-		
-	- Какие архитектурные принципы применены при реализации игры?
-	
-	- На основе какого приципа ООП построен алгоритм игры?
-	- Какими элементами языка С++ реализуется этот принцип?
-	- Приведите примеры кода, отображающие этот прицип.
-*/
 #include <thread>
 #include <memory>
 
@@ -50,9 +30,6 @@ int main(int argc, char* argv[]) {
 #ifdef QT_UI
 	QApplication application(argc, argv);
 #endif
-	// 1. Установка параметров игры
-	
-	
 	const int map_height = 30;
 	const int map_weight = 200;
 	auto frame_delay = std::chrono::milliseconds(0);
@@ -92,7 +69,6 @@ int main(int argc, char* argv[]) {
 	
 	svr::UserInput user_input;
 	do {
-		// 2. Получение пользовательского ввода	
 		user_input = keyboard->get_user_input();
 		switch (user_input) {
 			case svr::UserInput::MAP_LEFT:
@@ -117,7 +93,6 @@ int main(int argc, char* argv[]) {
 				break;
 		}
 		
-		// 3. Обновление внутреннего состояния игры
 		game.move_objs_horizontally();
 		game.check_horizontally_static_collisions();
 		
@@ -151,7 +126,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		
-		// 4. Обновление изображения на экране
 		game_map->refresh();
 		if (control_settings != nullptr) {
 			control_settings->set_cursor_start_position();
@@ -159,9 +133,7 @@ int main(int argc, char* argv[]) {
 		game_map->show();
 		std::this_thread::sleep_for(frame_delay);
 	} while (
-		/* 5. Проверка того, не окончена ли игра */ 
 		!game.is_finished()
 	);
 	
-	// 6. Завершение
 }
