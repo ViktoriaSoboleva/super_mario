@@ -4,6 +4,24 @@
 |:---:|
 | ![](./docs/super_mario.jpg) |
 
+## Qt-интерфейс
+
+Qt-интерфейс рисует пиксельный платформер с фиксированным размером тайла. Спрайты Марио, обычного и летающего врагов подключены из PNG в `src/ui/qt/assets` и встраиваются в приложение через Qt Resources. Логика уровней и игровой цикл остаются общими для консольной и Qt-версии.
+
+Для сборки нужны CMake, Ninja, компилятор C++ и Qt 5 или Qt 6 с модулем Widgets:
+
+```sh
+cmake -S src -B build_qt -G Ninja -DGAME_TYPE=Qt -DCMAKE_PREFIX_PATH=C:/msys64/ucrt64
+cmake --build build_qt
+```
+
+Замените `C:/msys64/ucrt64` на каталог установленного Qt SDK, если он находится в другом месте. Запускайте `build_qt/super_mario.exe` в Windows.
+Для запуска приложения Qt DLL и плагины платформы должны быть доступны через `PATH` (или развернуты рядом с exe).
+
+Управление: `A`/`D` или стрелки — движение, `Space`/`Up` — прыжок, `Q`/`Esc` — выход.
+
+Клавиатуру создаёт платформенная `AppFactory`: `WindowsAppFactory`, `LinuxAppFactory` или `QtAppFactory`. Фабрики возвращают общий интерфейс `KeyBoard`, поэтому игровой цикл не зависит от реализации ввода.
+
 За основу взят код игры с youtube канала "Begin End":  
 
 1. [Первая часть](https://www.youtube.com/watch?v=7sTPrktLLBo&list=PLBOPkQsFLCR2DWRY74L03FmbRtz_Yy73_&index=30)

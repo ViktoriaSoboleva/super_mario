@@ -19,8 +19,9 @@ void Game::add_mario(Mario* obj) {
 	mario = obj;
 }
 
+/* */
 void Game::add_moving_platform(MovingPlatform* obj) {
-    moving_platform = obj;
+    moving_platforms.push_back(obj);
     movable_objs.push_back(obj);
 }
 
@@ -108,18 +109,26 @@ void Game::move_map_right() noexcept {
 	}
 }
 
+
 void Game::move_objs_horizontally() noexcept { 
-	for (Movable* obj : movable_objs) { obj->move_horizontally(); }
-	if (mario != nullptr && moving_platform != nullptr) {
-    	const bool mario_on_platform =
-        	mario->get_bottom() >= moving_platform->get_top() - 1.0f &&
-        	mario->get_bottom() <= moving_platform->get_top() + 1.0f &&
-        	mario->get_right() > moving_platform->get_left() &&
-        	mario->get_left() < moving_platform->get_right();
+	for (Movable* obj : movable_objs) { 
+		obj->move_horizontally(); 
+	}	
+}
+
+
+void Game::check_mario_on_platform() noexcept{
+	for (MovingPlatform* platform : moving_platforms){
+
+		const bool mario_on_platform =
+			mario->get_bottom() >= platform->get_top() - 1.0f &&
+			mario->get_bottom() <= platform->get_top() + 1.0f &&
+			mario->get_right() > platform->get_left() &&
+			mario->get_left() < platform->get_right();
 
     	if (mario_on_platform) {
         	mario->move_horizontal_offset(
-            	moving_platform->get_hspeed()
+            	platform->get_hspeed()
         	);
     	}
 	}
@@ -151,6 +160,7 @@ void Game::remove_objs() {
 	collisionable_objs.clear();
 	map_movable_objs.clear();
 	movable_objs.clear();
+	moving_platforms.clear();
 	static_objs.clear();
 	remove_mario();
 }

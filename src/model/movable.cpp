@@ -1,5 +1,4 @@
 #include "movable.hpp"
-
 using svr::Movable;
 
 Movable::Movable(
@@ -22,7 +21,6 @@ float Movable::get_hspeed() const noexcept {
 	return hspeed;
 }
 
-
 void Movable::jump() noexcept {
 	if (vspeed == 0) {
 		vspeed = JUMP_SPEED;
@@ -37,9 +35,6 @@ void Movable::move_vertical_offset(const float offset) noexcept {
 	top_left.y += offset;
 }
 
-// ----------------------------------------------------------------------------
-// 									VIRTUAL
-// ----------------------------------------------------------------------------
 void Movable::move_horizontally() noexcept {
 	top_left.x += hspeed;
 }

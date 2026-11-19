@@ -11,6 +11,7 @@ namespace svr {
 
 	class KeyBoard {
 		public:
+			virtual ~KeyBoard() = default;
 			virtual UserInput get_user_input() = 0;
 			virtual void off() = 0;
 			virtual void on() = 0;

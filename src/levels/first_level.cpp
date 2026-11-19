@@ -40,6 +40,7 @@ void FirstLevel::init_data() {
 	ui_factory->create_ship({150, 25}, 40, 2);
 
 	ui_factory->create_moving_platform({130, 15}, 15, 2);
+	ui_factory->create_moving_platform({20, 10}, 15, 2);
 	
 	ui_factory->create_ship({210, 20}, 15, 7);
 	
@@ -52,7 +53,7 @@ void FirstLevel::init_data() {
 
 	ui_factory->create_flying_enemy({110, 10}, 3, 2);
 
-	ui_factory->create_jumping_enemy({70, 15}, 3, 2);
+	ui_factory->create_jumping_enemy({125, 15}, 3, 2);
 
 	
 }

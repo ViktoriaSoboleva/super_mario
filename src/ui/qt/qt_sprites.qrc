@@ -1,0 +1,7 @@
+<RCC>
+	<qresource prefix="/sprites">
+		<file alias="mario.png">assets/mario.png</file>
+		<file alias="enemy.png">assets/enemy.png</file>
+		<file alias="flying_enemy.png">assets/flying_enemy.png</file>
+	</qresource>
+</RCC>

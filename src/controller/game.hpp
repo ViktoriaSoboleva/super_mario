@@ -20,9 +20,10 @@ namespace svr {
 			std::vector<Rect*> static_objs;
 			std::vector<Collisionable*> collisionable_objs;
 			std::vector<Movable*> movable_objs;
+			std::vector<MovingPlatform*> moving_platforms;
 			
 			Mario* mario = nullptr;
-			MovingPlatform* moving_platform = nullptr;
+			
 			
 			bool is_finished_ = false;
 			bool is_level_end_ = false;
@@ -40,6 +41,7 @@ namespace svr {
 			void check_mario_collision();
 			bool check_static_collisions(Collisionable* obj) const noexcept;
 			void check_vertically_static_collisions() noexcept;
+			void check_mario_on_platform() noexcept;
 			
 			void finish() noexcept;
 			

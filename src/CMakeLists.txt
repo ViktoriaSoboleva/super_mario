@@ -8,6 +8,14 @@ set(SOURCES main.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+if(GAME_TYPE STREQUAL "Qt")
+	find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+	find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+	target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+	target_compile_definitions(${PROJECT_NAME} PRIVATE QT_UI)
+	set_target_properties(${PROJECT_NAME} PROPERTIES AUTORCC ON)
+endif()
+
 add_subdirectory(os_controls)
 add_subdirectory(controller)
 add_subdirectory(levels)

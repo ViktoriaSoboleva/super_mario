@@ -1,3 +1,10 @@
 {
-    "cmake.sourceDirectory": "C:/ibusko/code/vik_sob/super_mario/src"
+    "cmake.sourceDirectory": "${workspaceFolder}/src",
+    "cmake.buildDirectory": "${workspaceFolder}/build_qt_ninja",
+    "cmake.configureSettings": {
+        "GAME_TYPE": "Qt",
+        "CMAKE_PREFIX_PATH": "C:/msys64/ucrt64",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }

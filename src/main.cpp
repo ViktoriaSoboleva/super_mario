@@ -19,8 +19,15 @@
 	- Приведите примеры кода, отображающие этот прицип.
 */
 #include <thread>
+#include <memory>
 
+#ifdef QT_UI
+	#include <QApplication>
+	#include "qt_app_factory.hpp"
+	#include "qt_ui_factory.hpp"
+#else
 #include "console_ui_factory.hpp"
+#endif
 #include "first_level.hpp"
 #include "game.hpp"
 #include "game_level.hpp"
@@ -30,16 +37,19 @@
 #include "os_control_settings.hpp"
 #include "ui_factory.hpp"
 
-#ifdef WINDOWS_CONSOLE
+#if defined(WINDOWS_CONSOLE)
+	#include "windows_app_factory.hpp"
 	#include "windows_control_settings.hpp"
-	#include "windows_keyboard.hpp"
 #elif defined(LINUX_CONSOLE)
+	#include "linux_app_factory.hpp"
 	#include "linux_control_settings.hpp"
-	#include "linux_keyboard.hpp"
 	#include "ncurses.h"
 #endif
 
-int main() {
+int main(int argc, char* argv[]) {
+#ifdef QT_UI
+	QApplication application(argc, argv);
+#endif
 	// 1. Установка параметров игры
 	
 	
@@ -48,22 +58,34 @@ int main() {
 	auto frame_delay = std::chrono::milliseconds(0);
 	
 	svr::OSControlSettings* control_settings = nullptr;
-	svr::KeyBoard* keyboard = nullptr;
-	#ifdef WINDOWS_CONSOLE
+	std::unique_ptr<svr::AppFactory> app_factory;
+#ifdef QT_UI
+	app_factory = std::make_unique<svr::QtAppFactory>(&application);
+	frame_delay = std::chrono::milliseconds(16);
+#elif defined(WINDOWS_CONSOLE)
+		app_factory = std::make_unique<svr::WindowsAppFactory>();
 		control_settings = new svr::WindowsControlSettings();
-		keyboard = new svr::WindowsKeyBoard();
 		frame_delay = std::chrono::milliseconds(10);
-	#elif defined(LINUX_CONSOLE)
+#elif defined(LINUX_CONSOLE)
+		app_factory = std::make_unique<svr::LinuxAppFactory>();
 		control_settings = new svr::LinuxControlSettings(map_height, map_weight);
-		keyboard = new svr::LinuxKeyboard();
 		frame_delay = std::chrono::milliseconds(50);
-	#endif
+#endif
+
+	std::unique_ptr<svr::KeyBoard> keyboard = app_factory->create_keyboard();
 	
-	control_settings->init();
+	if (control_settings != nullptr) {
+		control_settings->init();
+	}
 	keyboard->on();
 	
 	svr::Game game;
+#ifdef QT_UI
+	svr::QtUIFactory qt_ui_factory(&game);
+	svr::UIFactory* ui_factory = &qt_ui_factory;
+#else
 	svr::UIFactory* ui_factory = new svr::ConsoleUIFactory(&game);
+#endif
 	svr::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
 	svr::GameLevel* game_level = new svr::FirstLevel(ui_factory);
 	svr::Mario* mario = ui_factory->get_mario();
@@ -102,6 +124,8 @@ int main() {
 		game.move_objs_vertically();
 		game.check_mario_collision();
 		game.check_vertically_static_collisions();
+
+		game.check_mario_on_platform();
 		
 		if (
 			game_map->is_below_map(mario->get_top())
@@ -129,7 +153,9 @@ int main() {
 		
 		// 4. Обновление изображения на экране
 		game_map->refresh();
-		control_settings->set_cursor_start_position();
+		if (control_settings != nullptr) {
+			control_settings->set_cursor_start_position();
+		}
 		game_map->show();
 		std::this_thread::sleep_for(frame_delay);
 	} while (
