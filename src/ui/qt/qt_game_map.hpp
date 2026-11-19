@@ -51,4 +51,5 @@ namespace svr {
 		protected:
 			void paintEvent(QPaintEvent* event) override;
 	};
+	
 }
